@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+    {% if not request.user.is_authenticated %}
+        <script>
+            window.location.href = '{% url "landing:index" %}';
+        </script>
+    {% endif %}
+
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-3 col-sm-6">
+            <a href="{{ post.get_absolute_url }}" class="btn btn-light">Back to Post</a>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3 mb-5">
+        <div class="col-md-5 col-sm-12">
+            <form method="POST">
+                {% csrf_token %}
+                <h5>Delete Post?</h5>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-danger mt-3">Delete!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}
